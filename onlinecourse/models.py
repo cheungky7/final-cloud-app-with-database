@@ -118,9 +118,10 @@ class Enrollment(models.Model):
     #        return False
 
 class Question(models.Model):
-     question_text = models.TextField()
-     grade = models.FloatField()
+     question_text = models.TextField(default='')
+     grade = models.FloatField(default=0.0)
      lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+     course = models.ForeignKey(Course, default=1 ,on_delete=models.CASCADE)
 
      def is_get_score(self, selected_ids):
         all_answers = self.choice_set.filter(is_correct=True).count()
