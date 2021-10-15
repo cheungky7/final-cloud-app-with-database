@@ -58,13 +58,20 @@
              <div class="card mt-1">
                 <div class="card-header"><b class="font-weight:bold">{{ question.question_text}}</b></div>
                     <div class="form-group">
-                        {% for choice in question.choice_set.all %}
+                   {% for choice in question.choice_set.all %}
                         <div class="form-check">
-                                {% if choice.is_correct == True %}
-                                    <label style="color:green">{{choice.choice_text}}</label>
+                        <!--    {% if choice.is_correct == True %}
+                                    <label style="color:green">Correct answer: {{choice.choice_text}}</label>
                                 {% else %}
-                                    <label style="color:red">{{choice.choice_text}}</label>
-                                {% endif %}
+                                    <label >{{choice.choice_text}}</label>
+                                {% endif %}-->
+                            {% if choice.is_correct == True and choice.id in selected_choices %}
+                            <label style="color:green">Correct answer: {{choice.choice_text}}</label>
+                             {% elif choice.is_correct == True  %}
+                             <label class="card-text text-warning">Not selected: {{choice.choice_text}}</label>
+                             {% else %}
+                             <label >{{choice.choice_text}}</label>
+                             {% endif %}
                         </div>
                         {% endfor %}
                     </div>

@@ -156,7 +156,11 @@ def show_exam_result(request, course_id, submission_id):
     #lesson = Lesson.objects.get(pk=lesson_id)
     submission = Submission.objects.get(pk=submission_id)
     questions = course.question_set.all()
-    selectedChoices = submission.choices.all()
+    #selectedChoices = submission.choices.all()
+    selectedChoices=[]
+    if submission.choices.all is not None:
+        for choice in submission.choices.all():
+            selectedChoices.append(choice.id)
 
     totalScore=0
     submittedScore=0
