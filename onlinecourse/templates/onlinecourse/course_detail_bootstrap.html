@@ -62,11 +62,6 @@
                 </div>
 
             -->
-            {% if user.is_authenticated %}
-             <div>
-            {% else %}
-             <div id="exam" class="collapse"></div>
-            {% endif %}
             <!-- <HINT> If user is authenticated, show course exam with a list of question -->
 
             <!-- <HINT> Each example will have many questions -->
@@ -99,6 +94,9 @@
                     <input class="btn btn-success btn-block" type="submit" value="Submit">
             </form> -->
                 <!--<input class="btn btn-success btn-block"  value="Start Exam">-->
+                {% if user.is_authenticated %}
+                <button class="btn btn-block btn-info" data-toggle="collapse" data-target="#question_div">Show exam</button>
+                <div id="question_div">
                 <form id="questionform" action="submit/" method="post">
                     {% for question in course.question_set.all %}
                         <div class="card mt-1">
@@ -120,6 +118,9 @@
                     <input class="btn btn-success btn-block" type="submit" value="Submit">
                 </form> 
             </div>
+            {% else %}
+             <div id="exam" class="collapse"></div>
+            {% endif %}
             <!--Check here to see more details Bootstrap checkbox
              https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp-->
     </div>
